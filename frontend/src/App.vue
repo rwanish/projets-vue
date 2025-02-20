@@ -20,8 +20,6 @@ import Parametrage from './components/Parametrage.vue'
 
   <!-- Intégration du composant Parametrage -->
   <Parametrage />
-
-  <RouterView />
 </template>
 
 <style scoped>
