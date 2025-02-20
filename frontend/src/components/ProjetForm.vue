@@ -187,18 +187,4 @@ code {
 
 </style>
 
-<template>
-  <div>
-    <ParticipationForm />
-  </div>
-</template>
 
-<script>
-import ParticipationForm from '@/components/ParticipationForm.vue';
-
-export default {
-  components: {
-    ParticipationForm,
-  },
-};
-</script>
