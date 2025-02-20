@@ -1,12 +1,13 @@
 <template>
   <div class="about">
-    <ProjetForm />
+    <Parametrage />
 
   </div>
 </template>
 
 <script setup>
 import ProjetForm from "@/components/ProjetForm.vue";
+import Parametrage from "@/components/Parametrage.vue";
 </script>
 
 <style>
