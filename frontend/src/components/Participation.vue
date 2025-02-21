@@ -16,10 +16,10 @@
       </option>
     </select>
 
-    <label for="role">Rôle</label>
-    <select v-model="form.role" id="role">
-      <option v-for="poste in roles" :key="poste.id" :value="poste.nom">
-        {{ poste.nom }}
+    <label for="poste">Rôle</label>
+    <select v-model="form.poste" id="poste">
+      <option v-for="poste in roles" :key="poste" :value="poste">
+        {{ poste }}
       </option>
     </select>
 
