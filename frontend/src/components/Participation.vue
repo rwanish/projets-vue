@@ -16,12 +16,8 @@
       </option>
     </select>
 
-    <label for="poste">Rôle</label>
-    <select v-model="form.poste" id="poste">
-      <option v-for="poste in roles" :key="poste.role" :value="poste.role">
-        {{ poste }}
-      </option>
-    </select>
+    <label for="role">Rôle</label>
+    <input v-model="form.role" id="poste" type="text" placeholder="Développeur" />
 
     <label for="pourcentage">Pourcentage</label>
     <input type="range" v-model="form.pourcentage" min="0" max="100" step="10" />

@@ -19,24 +19,18 @@ public class ParticipationController {
         this.mapper = mapper;
     }
 
-    /**
-     * Enregistre une participation d'une personne à un projet.
-     *
-     * @param matricule   Identifiant de la personne
-     * @param codeProjet  Identifiant du projet
-     * @param role        Rôle de la personne dans le projet
-     * @param pourcentage Pourcentage de temps consacré au projet
-     * @return Réponse HTTP
-     */
+
     @PostMapping
-    public ResponseEntity<?> enregistrerParticipation(
-            @RequestParam Integer matricule,
-            @RequestParam Integer codeProjet,
-            @RequestParam String role,
-            @RequestParam float pourcentage) {
+    public ResponseEntity<?>enregistrerParticipation(@RequestBody ParticipationDTO participationDTO){
         try {
             // On appelle le service métier
-            var participation = participationService.enregistrerParticipation(matricule, codeProjet, role, pourcentage);
+            var participation = participationService.enregistrerParticipation(
+                    participationDTO.getMatricule(),
+                    participationDTO.getCodeProjet(),
+                    participationDTO.getRole(),
+                    participationDTO.getPourcentage()
+            );
+
             // On renvoie la participation créée sous la forme d'un DTO
             var body = mapper.map(participation, ParticipationDTO.class);
             return ResponseEntity.ok(body);

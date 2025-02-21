@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Data
 public class ParticipationDTO implements Serializable {
     Integer id;
+    Integer matricule;
+    Integer codeProjet;
     String role;
     Float pourcentage;
     String projetNom;
