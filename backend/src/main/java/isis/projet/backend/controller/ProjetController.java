@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 
 import isis.projet.backend.dao.ProjetRepository;
 import isis.projet.backend.entity.Projet;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Data;
@@ -33,8 +35,8 @@ public class ProjetController {
                 .map(projet -> new ProjetDTO(
                         projet.getId(),
                         projet.getNom(),
-                        projet.getDebut().toString(),
-                        projet.getFin().toString()))
+                        projet.getDebut(),
+                        projet.getFin()))
                 .collect(Collectors.toList());
     }
     @PostMapping
@@ -43,7 +45,7 @@ public class ProjetController {
         projet.setNom(projetDTO.getNom());
 
         Projet savedProjet = projetRepository.save(projet);
-        ProjetDTO savedProjetDTO = new ProjetDTO(savedProjet.getId(), savedProjet.getNom(), savedProjet.getDebut().toString(), savedProjet.getFin().toString() );
+        ProjetDTO savedProjetDTO = new ProjetDTO(savedProjet.getId(), savedProjet.getNom(), savedProjet.getDebut(), savedProjet.getFin() );
 
         return new ResponseEntity<>(savedProjetDTO, HttpStatus.CREATED);
     }
@@ -54,6 +56,6 @@ public class ProjetController {
 class ProjetDTO {
     private Integer id;
     private String nom;
-    private String debut;
-    private String fin;
+    private LocalDate debut;
+    private LocalDate fin;
 }
