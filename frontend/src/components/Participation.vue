@@ -18,7 +18,7 @@
 
     <label for="poste">Rôle</label>
     <select v-model="form.poste" id="poste">
-      <option v-for="poste in roles" :key="poste" :value="poste">
+      <option v-for="poste in roles" :key="poste.role" :value="poste.role">
         {{ poste }}
       </option>
     </select>
@@ -61,7 +61,7 @@ export default {
          const projetsResponse = await fetch('http://localhost:8989/api/projets');
          this.projets = await projetsResponse.json();
 
-         const rolesResponse = await fetch('http://localhost:8989/api/personnes/{id}');
+         const rolesResponse = await fetch('http://localhost:8989/api/participations/{id}');
          this.roles = await rolesResponse.json();
 
        } catch (error) {
