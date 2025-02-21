@@ -55,7 +55,7 @@ export default {
   methods: {
      async fetchData() {
        try {
-         const personnesResponse = await fetch('http://localhost:8989/api/personnes');
+         const personnesResponse = await fetch('http://localhost:8989/api/personnes/{id}');
          this.personnes = await personnesResponse.json();
 
          const projetsResponse = await fetch('http://localhost:8989/api/projets');
