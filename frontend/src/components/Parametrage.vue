@@ -42,8 +42,30 @@ export default {
     };
   },
   methods: {
-    enregistrer() {
-      console.log('Participation enregistrée:', this.form);
+    async enregistrer() {
+try {
+        const response = await fetch('http://localhost:8989/api/gestion/participation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            personne: this.form.personne, // Assure-toi que ça correspond à l'attendu par le backend
+            projet: this.form.projet,
+            role: this.form.role,
+            pourcentage: this.form.pourcentage,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Échec de l’enregistrement');
+        }
+
+        const result = await response.json();
+        alert('Participation enregistrée avec succès !');
+        console.log('Réponse du backend :', result);
+      } catch (error) {
+        console.error('Erreur lors de l’enregistrement :', error);
+        alert('Erreur : ' + error.message);
+      }
     },
   },
 };
