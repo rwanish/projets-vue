@@ -17,7 +17,11 @@
     </select>
 
     <label for="role">Rôle</label>
-    <input v-model="form.role" id="role" type="text" placeholder="Développeur" />
+    <select v-model="form.role" id="role">
+      <option v-for="poste in roles" :key="poste.id" :value="poste.nom">
+        {{ poste.nom }}
+      </option>
+    </select>
 
     <label for="pourcentage">Pourcentage</label>
     <input type="range" v-model="form.pourcentage" min="0" max="100" step="10" />
@@ -39,11 +43,12 @@ export default {
       form: {
         personne: null,
         projet: null,
-        role: '',
+        role: null,
         pourcentage: 0 ,
       },
       personnes: [],
       projets: [],
+      roles: [],
       error: null,
     };
   },
@@ -55,6 +60,10 @@ export default {
 
          const projetsResponse = await fetch('http://localhost:8989/api/projets');
          this.projets = await projetsResponse.json();
+
+         const rolesResponse = await fetch('http://localhost:8989/api/personnes/');
+         this.roles = await rolesResponse.json();
+
        } catch (error) {
          console.error('Erreur lors du chargement des données :', error);
          this.error = 'Erreur lors du chargement des données. Veuillez réessayer.';
