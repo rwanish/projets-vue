@@ -50,10 +50,10 @@ export default {
   methods: {
      async fetchData() {
        try {
-         const personnesResponse = await fetch('http://localhost:8989/api/personne');
+         const personnesResponse = await fetch('http://localhost:8989/api/personnes');
          this.personnes = await personnesResponse.json();
 
-         const projetsResponse = await fetch('http://localhost:8989/api/projet');
+         const projetsResponse = await fetch('http://localhost:8989/api/projets');
          this.projets = await projetsResponse.json();
        } catch (error) {
          console.error('Erreur lors du chargement des données :', error);
