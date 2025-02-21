@@ -43,12 +43,11 @@ export default {
       form: {
         personne: null,
         projet: null,
-        role: null,
+        role: '',
         pourcentage: 0 ,
       },
       personnes: [],
       projets: [],
-      roles: [],
       error: null,
     };
   },
@@ -60,9 +59,6 @@ export default {
 
          const projetsResponse = await fetch('http://localhost:8989/api/projets');
          this.projets = await projetsResponse.json();
-
-         const rolesResponse = await fetch('http://localhost:8989/api/participations/{id}');
-         this.roles = await rolesResponse.json();
 
        } catch (error) {
          console.error('Erreur lors du chargement des données :', error);
