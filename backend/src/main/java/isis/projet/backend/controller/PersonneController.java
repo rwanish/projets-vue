@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api/personnes")
+@RequestMapping("/api/personnes/{id}")
 public class PersonneController {
     private final PersonneRepository personneRepository;
 

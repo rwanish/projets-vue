@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h2>Enregistrer une participationnnnnnnnn</h2>
+    <h2>Enregistrer une participation</h2>
 
     <label for="personne">Personne</label>
     <select v-model="form.personne" id="personne">
@@ -61,7 +61,7 @@ export default {
          const projetsResponse = await fetch('http://localhost:8989/api/projets');
          this.projets = await projetsResponse.json();
 
-         const rolesResponse = await fetch('http://localhost:8989/api/personnes/');
+         const rolesResponse = await fetch('http://localhost:8989/api/personnes/{id}');
          this.roles = await rolesResponse.json();
 
        } catch (error) {
