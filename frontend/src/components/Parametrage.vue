@@ -35,10 +35,10 @@ export default {
         personne: '',
         projet: '',
         role: '',
-        pourcentage: ,
+        pourcentage: 0 ,
       },
       personnes: ['', ''],
-      projets: [{ id: , nom: '' }, { id: , nom: '' }],
+      projets: [{ id: 1, nom: 'Projet 1 (en cours)' }, { id: 2, nom: 'Projet 2 (terminé)' }, { id: 3, nom: 'Projet 3 (en cours)' }],
     };
   },
   methods: {
