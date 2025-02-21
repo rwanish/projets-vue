@@ -4,14 +4,14 @@
 
     <label for="personne">Personne</label>
     <select v-model="form.personne" id="personne">
-      <option v-for="person in personnes" :key="person" :value="person">
-        {{ person }}
+      <option v-for="person in personnes" :key="person.matricule" :value="person.matricule">
+        {{ person.nom }} {{ person.prenom }}
       </option>
     </select>
 
     <label for="projet">Projet</label>
     <select v-model="form.projet" id="projet">
-      <option v-for="projet in projets" :key="projet.id" :value="projet.nom">
+      <option v-for="projet in projets" :key="projet.id" :value="projet.id">
         {{ projet.nom }}
       </option>
     </select>
@@ -24,6 +24,11 @@
     <p>{{ form.pourcentage }}%</p>
 
     <button @click="enregistrer">Enregistrer</button>
+
+    <div v-if="error" class="error">
+          {{ error }}
+    </div>
+
   </div>
 </template>
 
@@ -32,44 +37,69 @@ export default {
   data() {
     return {
       form: {
-        personne: '',
-        projet: '',
+        personne: null,
+        projet: null,
         role: '',
         pourcentage: 0 ,
       },
-      personnes: ['', ''],
-      projets: [{ id: 1, nom: 'Projet 1 (en cours)' }, { id: 2, nom: 'Projet 2 (terminé)' }, { id: 3, nom: 'Projet 3 (en cours)' }],
+      personnes: [],
+      projets: [],
+      error: null,
     };
   },
   methods: {
-    async enregistrer() {
-try {
-        const response = await fetch('http://localhost:8989/api/gestion/participation', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            personne: this.form.personne, // Assure-toi que ça correspond à l'attendu par le backend
-            projet: this.form.projet,
-            role: this.form.role,
-            pourcentage: this.form.pourcentage,
-          }),
-        });
+     async fetchData() {
+       try {
+         const personnesResponse = await fetch('http://localhost:8989/api/personne');
+         this.personnes = await personnesResponse.json();
 
-        if (!response.ok) {
-          throw new Error('Échec de l’enregistrement');
-        }
+         const projetsResponse = await fetch('http://localhost:8989/api/projet');
+         this.projets = await projetsResponse.json();
+       } catch (error) {
+         console.error('Erreur lors du chargement des données :', error);
+         this.error = 'Erreur lors du chargement des données. Veuillez réessayer.';
+       }
+     },
+     async enregistrer() {
+       try {
+         const response = await fetch('http://localhost:8989/api/gestion/participation', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({
+             matricule: this.form.personne,
+             codeProjet: this.form.projet,
+             role: this.form.role,
+             pourcentage: this.form.pourcentage / 100,
+           }),
+         });
 
-        const result = await response.json();
-        alert('Participation enregistrée avec succès !');
-        console.log('Réponse du backend :', result);
-      } catch (error) {
-        console.error('Erreur lors de l’enregistrement :', error);
-        alert('Erreur : ' + error.message);
-      }
-    },
-  },
-};
-</script>
+         if (!response.ok) {
+           const errorData = await response.json();
+           throw new Error(errorData.message || 'Échec de l’enregistrement');
+         }
+
+         alert('Participation enregistrée avec succès !');
+         this.resetForm();
+       } catch (error) {
+         console.error('Erreur lors de l’enregistrement :', error);
+         this.error = error.message;
+       }
+     },
+     resetForm() {
+       this.form = {
+         personne: null,
+         projet: null,
+         role: '',
+         pourcentage: 0,
+       };
+       this.error = null;
+     },
+   },
+   mounted() {
+     this.fetchData();
+   },
+ };
+ </script>
 
 <style scoped>
 .card {
