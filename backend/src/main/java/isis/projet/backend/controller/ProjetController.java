@@ -1,9 +1,9 @@
 package isis.projet.backend.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import isis.projet.backend.dao.ProjetRepository;
 import isis.projet.backend.entity.Projet;
@@ -32,8 +32,20 @@ public class ProjetController {
                 .stream()
                 .map(projet -> new ProjetDTO(
                         projet.getId(),
-                        projet.getNom()))
+                        projet.getNom(),
+                        projet.getDebut().toString(),
+                        projet.getFin().toString()))
                 .collect(Collectors.toList());
+    }
+    @PostMapping
+    public ResponseEntity<ProjetDTO> addProjet(@RequestBody ProjetDTO projetDTO) {
+        Projet projet = new Projet();
+        projet.setNom(projetDTO.getNom());
+
+        Projet savedProjet = projetRepository.save(projet);
+        ProjetDTO savedProjetDTO = new ProjetDTO(savedProjet.getId(), savedProjet.getNom(), savedProjet.getDebut().toString(), savedProjet.getFin().toString() );
+
+        return new ResponseEntity<>(savedProjetDTO, HttpStatus.CREATED);
     }
 }
 
@@ -42,4 +54,6 @@ public class ProjetController {
 class ProjetDTO {
     private Integer id;
     private String nom;
+    private String debut;
+    private String fin;
 }

@@ -78,9 +78,13 @@ function ajouteProjet() {
 function refresh() {
   doAjaxRequest("/api/projets") // Méthode GET par défaut
     .then((result) => {
-      data.projets = result._embedded.projets;
+      console.log("Réponse API :", result); // Pour voir la structure des données
+      data.projets = Array.isArray(result) ? result : result._embedded?.projets ?? [];
     })
-    .catch(error => alert(error.message));
+    .catch(error => {
+          console.error("Erreur lors de la récupération des projets :", error);
+          alert(error.message);
+    });
 }
 
 // Appeler la fonction refresh() pour récupérer la liste des pays au chargement du composant

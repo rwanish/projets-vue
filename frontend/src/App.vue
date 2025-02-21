@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import Parametrage from './components/Parametrage.vue'
+
 </script>
 
 <template>
@@ -14,12 +14,11 @@ import Parametrage from './components/Parametrage.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">Les projets</RouterLink>
+        <RouterLink to="/Participation">Participation</RouterLink>
       </nav>
     </div>
   </header>
-
-  <!-- Intégration du composant Parametrage -->
-  <Parametrage />
+  <RouterView />
 </template>
 
 <style scoped>

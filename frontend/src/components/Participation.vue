@@ -61,6 +61,7 @@ export default {
        }
      },
      async enregistrer() {
+      console.log("Valeur de matricule:", this.form.personne); // Vérifier si une valeur est bien sélectionnée
        try {
          const response = await fetch('http://localhost:8989/api/gestion/participation', {
            method: 'POST',
