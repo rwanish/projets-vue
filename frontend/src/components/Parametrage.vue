@@ -37,7 +37,7 @@ export default {
         role: '',
         pourcentage: ,
       },
-      personnes: ['', 'Jane Doe'],
+      personnes: ['', ''],
       projets: [{ id: , nom: '' }, { id: , nom: '' }],
     };
   },
