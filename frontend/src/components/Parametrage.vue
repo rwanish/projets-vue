@@ -34,11 +34,11 @@ export default {
       form: {
         personne: '',
         projet: '',
-        role: 'développeur',
-        pourcentage: 10,
+        role: '',
+        pourcentage: ,
       },
-      personnes: ['John Doe', 'Jane Doe'],
-      projets: [{ id: 1, nom: 'Projet 1 (en cours)' }, { id: 2, nom: 'Projet 2' }],
+      personnes: ['', 'Jane Doe'],
+      projets: [{ id: , nom: '' }, { id: , nom: '' }],
     };
   },
   methods: {
