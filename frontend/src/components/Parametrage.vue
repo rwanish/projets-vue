@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h2>Enregistrer une participation</h2>
+    <h2>Enregistrer une participationnnnnnnnn</h2>
 
     <label for="personne">Personne</label>
     <select v-model="form.personne" id="personne">
