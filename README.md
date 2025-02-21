@@ -2,7 +2,7 @@
 
 ## Structure du projet
 
-```
+``` 
 monorepo
 ├─┬ backend     → backend Spring Boot 
 │ ├── src
